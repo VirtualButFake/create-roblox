@@ -1,6 +1,6 @@
 {
 	"name": "create-roblox",
-	"version": "0.1.1",
+	"version": "0.1.3",
 	"description": "A dynamic template CLI for Roblox projects.",
 	"main": "dist/index.cjs",
 	"type": "module",
@@ -34,11 +34,11 @@
 		"@typescript-eslint/eslint-plugin": "^7.1.0",
 		"eslint": "^8.57.0"
 	},
-    "files": [
-        "dist",
-        "template",
-        "bin",
-        "LICENSE.md",
-        "bin.cjs"
-    ]
+	"files": [
+		"dist",
+		"bin",
+		"src/template",
+		"LICENSE.md",
+		"bin.cjs"
+	]
 }
