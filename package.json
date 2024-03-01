@@ -1,7 +1,7 @@
 {
-	"name": "create-rblx",
+	"name": "create-roblox",
 	"version": "0.1.1",
-	"description": "A dynamic scaffolding utility for Roblox projects.",
+	"description": "A dynamic template CLI for Roblox projects.",
 	"main": "dist/index.cjs",
 	"type": "module",
 	"scripts": {
@@ -16,12 +16,12 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/VirtualButFake/create-rblx.git"
+		"url": "git+https://github.com/VirtualButFake/create-roblox.git"
 	},
 	"bugs": {
-		"url": "https://github.com/VirtualButFake/create-rblx/issues"
+		"url": "https://github.com/VirtualButFake/create-roblox/issues"
 	},
-	"homepage": "https://github.com/VirtualButFake/create-rblx#readme",
+	"homepage": "https://github.com/VirtualButFake/create-roblox#readme",
 	"dependencies": {
 		"@types/fs-extra": "^11.0.4",
 		"@types/inquirer": "^9.0.7",
@@ -33,5 +33,12 @@
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^7.1.0",
 		"eslint": "^8.57.0"
-	}
+	},
+    "files": [
+        "dist",
+        "template",
+        "bin",
+        "LICENSE.md",
+        "bin.cjs"
+    ]
 }
