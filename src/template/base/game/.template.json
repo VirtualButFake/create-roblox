@@ -1,0 +1,9 @@
+{
+    "absolutePaths": {
+        "@client": "src/client",
+        "@controllers": "src/client/controllers",
+        "@server": "src/server",
+        "@services": "src/server/services",
+        "@common": "src/common"
+    }
+}

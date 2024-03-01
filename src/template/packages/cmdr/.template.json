@@ -1,0 +1,3 @@
+{
+	"packages": ["cmdr = \"evaera/cmdr@1.12.0\""]
+}

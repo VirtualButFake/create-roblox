@@ -1,0 +1,24 @@
+{
+	"name": "{{ project_name }}",
+	"emitLegacyScripts": false,
+	"tree": {
+		"$className": "DataModel",
+		"ReplicatedStorage": {
+			"Packages": {
+				"$className": "Folder",
+				"$path": "{{ package_path }}"
+			},
+			"client": {
+				"$path": "build/client"
+			},
+			"common": {
+				"$path": "build/common"
+			}
+		},
+		"ServerScriptService": {
+			"server": {
+				"$path": "build/server"
+			}
+		}
+	}
+}
