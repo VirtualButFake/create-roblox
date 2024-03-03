@@ -1,6 +1,6 @@
 {
 	"name": "create-roblox",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"description": "A dynamic template CLI for Roblox projects.",
 	"main": "dist/index.cjs",
 	"type": "module",
