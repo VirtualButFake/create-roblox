@@ -1,8 +1,5 @@
 import { ProjectSettings } from "../cli.js";
-import {
-	writeTemplate,
-	getPackagePath
-} from "../utils.js";
+import { writeTemplate, getPackagePath } from "../utils.js";
 import fs from "fs";
 
 export default async function (settings: ProjectSettings) {
@@ -23,6 +20,16 @@ export default async function (settings: ProjectSettings) {
 			.replaceAll("{{ project_name }}", settings.projectName)
 			.replaceAll("{{ package_path }}", getPackagePath(settings))
 	);
+
+	if (fs.existsSync("./temp/dev.project.json")) {
+		fs.writeFileSync(
+			"./temp/dev.project.json",
+			fs
+				.readFileSync("./temp/dev.project.json", "utf-8")
+				.replaceAll("{{ project_name }}", settings.projectName)
+				.replaceAll("{{ package_path }}", getPackagePath(settings))
+		);
+	}
 
 	fs.writeFileSync(
 		"README.md",

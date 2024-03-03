@@ -27,4 +27,4 @@ if fs.isFile(".darklua.json") then
     task.wait(0.5) -- allow darklua to generate a build, so that rojo doesn't refer to unknown paths and error
 end
 
-task.spawn(executeCommand, "rojo", { "serve", "default.project.json" })
+task.spawn(executeCommand, "rojo", { "serve", fs.isFile("dev.project.json") and "dev.project.json" or "default.project.json" })
