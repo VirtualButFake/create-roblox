@@ -13,22 +13,22 @@ export default async function (settings: ProjectSettings) {
 		"./temp/build.project.json",
 		fs
 			.readFileSync("./temp/build.project.json", "utf-8")
-			.replace("{{ project_name }}", settings.projectName)
-			.replace("{{ package_path }}", getPackagePath(settings))
+			.replaceAll("{{ project_name }}", settings.projectName)
+			.replaceAll("{{ package_path }}", getPackagePath(settings))
 	);
 	fs.writeFileSync(
 		"./temp/default.project.json",
 		fs
 			.readFileSync("./temp/default.project.json", "utf-8")
-			.replace("{{ project_name }}", settings.projectName)
-			.replace("{{ package_path }}", getPackagePath(settings))
+			.replaceAll("{{ project_name }}", settings.projectName)
+			.replaceAll("{{ package_path }}", getPackagePath(settings))
 	);
 
 	fs.writeFileSync(
 		"README.md",
 		fs
 			.readFileSync("README.md", "utf-8")
-			.replace("{{ project_name }}", settings.projectName)
+			.replaceAll("{{ project_name }}", settings.projectName)
 	);
 
 	if (!settings.tools.find((tool) => tool === "darklua")) {
