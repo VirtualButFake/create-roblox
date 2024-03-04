@@ -13,6 +13,7 @@ export default async function (settings: ProjectSettings) {
 			.replaceAll("{{ project_name }}", settings.projectName)
 			.replaceAll("{{ package_path }}", getPackagePath(settings))
 	);
+
 	fs.writeFileSync(
 		"./temp/default.project.json",
 		fs

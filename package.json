@@ -1,13 +1,14 @@
 {
 	"name": "create-roblox",
-	"version": "0.1.7",
+	"version": "0.2.0",
 	"description": "A dynamic template CLI for Roblox projects.",
 	"main": "dist/index.cjs",
 	"type": "module",
 	"scripts": {
 		"build": "npx esbuild src/index.ts --bundle --outdir=dist --platform=node --minify --out-extension:.js=.cjs",
 		"start": "npm run build && node dist/index.cjs",
-		"dev": "npx esbuild src/index.ts --bundle --outdir=dist --platform=node --watch"
+		"dev": "npx esbuild src/index.ts --bundle --outdir=dist --platform=node --watch",
+		"npm:prepare": "npm run build"
 	},
 	"bin": {
 		"create-roblox": "./bin.cjs"
