@@ -33,9 +33,9 @@ export default async function (settings: ProjectSettings) {
 	}
 
 	fs.writeFileSync(
-		"README.md",
+		"./temp/README.md",
 		fs
-			.readFileSync("README.md", "utf-8")
+			.readFileSync("./temp/README.md", "utf-8")
 			.replaceAll("{{ project_name }}", settings.projectName)
 	);
 
