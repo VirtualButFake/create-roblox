@@ -6,31 +6,18 @@ export default async function (settings: ProjectSettings) {
 	await writeTemplate(["base", "init"]);
 	await writeTemplate(["base", settings.projectType]);
 
-	fs.writeFileSync(
-		"./temp/build.project.json",
-		fs
-			.readFileSync("./temp/build.project.json", "utf-8")
-			.replaceAll("{{ project_name }}", settings.projectName)
-			.replaceAll("{{ package_path }}", getPackagePath(settings))
-	);
-
-	fs.writeFileSync(
-		"./temp/default.project.json",
-		fs
-			.readFileSync("./temp/default.project.json", "utf-8")
-			.replaceAll("{{ project_name }}", settings.projectName)
-			.replaceAll("{{ package_path }}", getPackagePath(settings))
-	);
-
-	if (fs.existsSync("./temp/dev.project.json")) {
-		fs.writeFileSync(
-			"./temp/dev.project.json",
-			fs
-				.readFileSync("./temp/dev.project.json", "utf-8")
-				.replaceAll("{{ project_name }}", settings.projectName)
-				.replaceAll("{{ package_path }}", getPackagePath(settings))
-		);
-	}
+    for (const file of fs.readdirSync("./temp")) {
+        if (file.endsWith(".project.json")) {
+            fs.writeFileSync(
+                `./temp/${file}`,
+                fs
+                    .readFileSync(`./temp/${file}`, "utf-8")
+                    .replaceAll("{{ project_name }}", settings.projectName)
+                    .replaceAll("{{ package_path }}", getPackagePath(settings))
+            );
+        
+        }
+    }
 
 	fs.writeFileSync(
 		"./temp/README.md",
@@ -39,7 +26,19 @@ export default async function (settings: ProjectSettings) {
 			.replaceAll("{{ project_name }}", settings.projectName)
 	);
 
-	if (!settings.tools.find((tool) => tool === "darklua")) {
+	if (!settings.tools.find((tool) => tool === "darklua") && settings.projectType == "game") {
 		fs.unlinkSync("./temp/build.project.json");
 	}
+
+    if (!settings.tools.find((tool) => tool === "darklua") && settings.projectType == "package") {
+        // replace "build" with "src" in dev.project.json and default.project.json
+        for (const file of ["dev.project.json", "default.project.json"]) {
+            fs.writeFileSync(
+                `./temp/${file}`,
+                fs
+                    .readFileSync(`./temp/${file}`, "utf-8")
+                    .replaceAll("\"$path\": \"build\"", "\"$path\": \"src\"")
+            );
+        }
+    }
 }

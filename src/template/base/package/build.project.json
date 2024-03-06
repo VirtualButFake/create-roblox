@@ -1,7 +1,0 @@
-{
-    "name": "{{ project_name }}",
-    "tree": {
-      "$path": "build"
-    }
-  }
-  

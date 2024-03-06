@@ -33,7 +33,7 @@ end
 
 executeCommand("rojo", {
 	"sourcemap",
-	"default.project.json",
+	"sourcemap.project.json",
 	"-o",
 	"sourcemap.json",
 })

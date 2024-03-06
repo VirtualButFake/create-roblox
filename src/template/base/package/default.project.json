@@ -1,14 +1,7 @@
 {
-	"name": "{{ project_name }}",
-	"tree": {
-		"$className": "DataModel",
-		"ReplicatedStorage": {
-			"Packages": {
-				"$path": "{{ package_path }}",
-				"{{ project_name }}": {
-					"$path": "src"
-				}
-			}
-		}
-	}
-}
+    "name": "{{ project_name }}",
+    "tree": {
+      "$path": "build"
+    }
+  }
+  
