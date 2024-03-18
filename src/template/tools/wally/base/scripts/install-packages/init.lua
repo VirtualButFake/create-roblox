@@ -33,7 +33,7 @@ end
 
 executeCommand("rojo", {
 	"sourcemap",
-	"sourcemap.project.json",
+	fs.isFile("sourcemap.project.json") and "sourcemap.project.json" or "default.project.json",
 	"-o",
 	"sourcemap.json",
 })

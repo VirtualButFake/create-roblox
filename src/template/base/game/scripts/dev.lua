@@ -25,6 +25,8 @@ if fs.isFile(".darklua.json") then
 	process.env.RBLX_DEV = "true"
 	task.spawn(executeCommand, "darklua", { "process", "src", "build", "--watch" })
     task.wait(0.5) -- allow darklua to generate a build, so that rojo doesn't refer to unknown paths and error
+    task.spawn(executeCommand, "rojo", { "serve", fs.isFile("dev.project.json") and "dev.project.json" or "build.project.json" })
+else   
+    task.spawn(executeCommand, "rojo", { "serve", "default.project.json"})
 end
 
-task.spawn(executeCommand, "rojo", { "serve", fs.isFile("dev.project.json") and "dev.project.json" or "default.project.json" })
