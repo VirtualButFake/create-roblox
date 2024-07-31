@@ -25,13 +25,16 @@ local function recursiveCopy(src, dest)
 		local meta = fs.metadata(path)
 
 		if meta.kind == "file" then
-            fs.writeDir(dest)
+			fs.writeDir(dest)
 			fs.writeFile(`{dest}/{file}`, fs.readFile(path))
 		elseif meta.kind == "dir" then
 			recursiveCopy(path, `{dest}/{file}`)
 		end
 	end
 end
+
+local hasDarkLua = fs.isFile(".darklua.json")
+local buildPath = hasDarkLua and "build" or "default"
 
 local function processFiles()
 	if fs.isDir(".zap") then
@@ -41,7 +44,7 @@ local function processFiles()
 	if fs.isFile(".darklua.json") then
 		-- clone src as build
 		recursiveCopy("src", "build")
-		executeCommand("rojo", { "sourcemap", "build.project.json", "-o", "sourcemap.json" })
+		executeCommand("rojo", { "sourcemap", `{buildPath}.project.json`, "-o", "sourcemap.json" })
 
 		process.env.RBLX_DEV = "true"
 		executeCommand("darklua", { "process", "build", "build" })
@@ -59,6 +62,6 @@ end, function(files)
 	logger:info(`Detected {#files} deleted files, deleting from build..`)
 end)
 
-executeCommand("rojo", { "serve", "build.project.json" }, {
+executeCommand("rojo", { "serve", `{buildPath}.project.json` }, {
 	stdio = "inherit",
 })

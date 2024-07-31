@@ -47,17 +47,17 @@ end
 local hasDarkLua = fs.isFile(".darklua.json")
 local buildPath = hasDarkLua and "build" or "default"
 
-recursiveCopy("src", "build")
+recursiveCopy("src", "dist")
 executeCommand("rojo", { "sourcemap", "default.project.json", "-o", "sourcemap.json" })
 
 if hasDarkLua then
 	process.env.RBLX_DEV = "this value should be taken out of the code"
-	executeCommand("darklua", { "process", "src", "build" })
+	executeCommand("darklua", { "process", "src", "dist" })
 end
 
 -- get rid of stories; no need for those to be in the actual build
-if fs.isDir("build/client/ui/stories") then
-	fs.removeDir("build/client/ui/stories")
+if fs.isDir("dist/client/ui/stories") then
+	fs.removeDir("dist/client/ui/stories")
 end
 
 if not didError then
