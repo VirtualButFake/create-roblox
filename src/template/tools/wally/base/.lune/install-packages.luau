@@ -2,7 +2,7 @@ local process = require("@lune/process")
 local fs = require("@lune/fs")
 local task = require("@lune/task")
 
-local logger = require("./lib/logger").new(5)
+local logger = require("./lib/logger").new(4)
 
 function executeCommand(command, args)
 	local data = process.spawn(command, args, {

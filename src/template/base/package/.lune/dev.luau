@@ -34,7 +34,7 @@ local process = require("@lune/process")
 local fs = require("@lune/fs")
 local task = require("@lune/task")
 
-local logger = require("./lib/logger").new(5)
+local logger = require("./lib/logger").new(4)
 local fileWatcher = require("./lib/fileWatcher")
 
 function executeCommand(command, args, options)

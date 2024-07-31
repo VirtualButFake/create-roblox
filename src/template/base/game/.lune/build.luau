@@ -1,7 +1,7 @@
 local process = require("@lune/process")
 local fs = require("@lune/fs")
 
-local logger = require("./lib/logger").new(5)
+local logger = require("./lib/logger").new(4)
 
 local didError = false
 
