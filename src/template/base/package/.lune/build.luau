@@ -35,18 +35,18 @@ local function recursiveCopy(src, dest)
 end
 
 if not fs.isDir("packages") and not fs.isDir("Packages") and fs.isFile("wally.toml") then
-	executeCommand("lune", { "run", "install-packages" })
+	execCommandWrapper("lune", { "run", "install-packages" })
 end
 
 local hasDarkLua = fs.isFile(".darklua.json")
 local buildPath = hasDarkLua and "build" or "default"
 
 recursiveCopy("src", "dist")
-executeCommand("rojo", { "sourcemap", "default.project.json", "-o", "sourcemap.json" })
+execCommandWrapper("rojo", { "sourcemap", "default.project.json", "-o", "sourcemap.json" })
 
 if hasDarkLua then
 	process.env.RBLX_DEV = "this value should be taken out of the code"
-	executeCommand("darklua", { "process", "src", "dist" })
+	execCommandWrapper("darklua", { "process", "src", "dist" })
 end
 
 -- get rid of stories; no need for those to be in the actual build
@@ -55,7 +55,7 @@ if fs.isDir("dist/ui/stories") then
 end
 
 if not didError then
-	executeCommand("rojo", { "build", `{buildPath}.project.json`, "-o", "build.rbxm" })
+	execCommandWrapper("rojo", { "build", `{buildPath}.project.json`, "-o", "build.rbxm" })
 	logger:success("Build complete!")
 else 
     logger:error("Build failed due to errors.")
