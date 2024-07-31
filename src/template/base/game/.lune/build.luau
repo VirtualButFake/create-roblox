@@ -61,7 +61,7 @@ if fs.isDir("build/client/ui/stories") then
 end
 
 if not didError then
-	executeCommand("rojo", { "build", `{buildPath}.project.json`, "-o", "build.rbxlx" })
+	executeCommand("rojo", { "build", `{buildPath}.project.json`, "-o", "build.rbxl" })
 	logger:success("Build complete!")
 else
 	logger:error("Build failed due to errors.")
