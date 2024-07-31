@@ -2,6 +2,8 @@ local process = require("@lune/process")
 local fs = require("@lune/fs")
 local task = require("@lune/task")
 
+local logger = require("./lib/logger").new(5)
+
 function executeCommand(command, args)
 	local data = process.spawn(command, args, {
 		stdio = "inherit",
@@ -44,10 +46,6 @@ if fs.isDir("Packages") then
 		"sourcemap.json",
 		"./Packages",
 	})
-
-	-- doing this instead of placing it inside 1 file since this method ties into the existing template concept better
-	if fs.isFile("scripts/install-packages/lowercase.lua") then
-		task.wait(0.5) -- sometimes os doesn't release the file fast enough
-		require("./lowercase")()
-	end
 end
+
+logger:info("Installed packages!")
