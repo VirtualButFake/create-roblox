@@ -1,20 +1,7 @@
-local process = require("@lune/process")
 local fs = require("@lune/fs")
-local task = require("@lune/task")
 
 local logger = require("./lib/logger").new(4)
-
-function executeCommand(command, args)
-	local data = process.spawn(command, args, {
-		stdio = "inherit",
-	})
-
-	if data.code ~= 0 then
-		error("Command failed with code " .. data.code)
-	end
-
-	return data
-end
+local executeCommand = require("./lib/executeCommand")
 
 if fs.isDir("packages") then
 	fs.removeDir("packages")

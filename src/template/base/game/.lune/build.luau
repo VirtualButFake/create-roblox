@@ -2,20 +2,18 @@ local process = require("@lune/process")
 local fs = require("@lune/fs")
 
 local logger = require("./lib/logger").new(4)
+local executeCommand = require("./lib/executeCommand")
 
 local didError = false
 
-function executeCommand(command, args, options)
-	local data = process.spawn(command, args, options or {
-		stdio = "default",
-	})
+local function execCommandWrapper(...)
+    local data = executeCommand(...)
 
-	if data.stderr ~= "" then
-		didError = true
-		logger:error(`Error occurred when running \"{command}\" (code {data.code}): \n{data.stderr}`)
-	end
+    if data.stderr ~= "" then
+        didError = true
+    end
 
-	return data
+    return data
 end
 
 local function recursiveCopy(src, dest)
