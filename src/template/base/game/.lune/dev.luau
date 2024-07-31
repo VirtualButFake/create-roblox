@@ -32,11 +32,11 @@ local function processFiles()
 
 	if fs.isFile(".darklua.json") then
 		-- clone src as build
-		recursiveCopy("src", "build")
+		recursiveCopy("src", "dist")
 		executeCommand("rojo", { "sourcemap", `{buildPath}.project.json`, "-o", "sourcemap.json" })
 
 		process.env.RBLX_DEV = "true"
-		executeCommand("darklua", { "process", "build", "build" })
+		executeCommand("darklua", { "process", "dist", "dist" })
 	end
 end
 
