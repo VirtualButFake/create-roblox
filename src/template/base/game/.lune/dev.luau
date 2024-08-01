@@ -38,8 +38,9 @@ local function processFiles()
 		local status = executeCommand("darklua", { "process", "src", "temp" })
 
         if status.code == 0 then
-            logger:error("Did not update files due to Darklua error, check console for more information.")
 			recursiveCopy("temp", "dist")
+        else 
+            logger:error("Did not update files due to Darklua error, check console for more information.")
 		end
 
         fs.removeDir("temp")

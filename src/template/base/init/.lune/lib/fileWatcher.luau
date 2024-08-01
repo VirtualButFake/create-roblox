@@ -63,7 +63,6 @@ return function(directory: string, callback: (files: { string }) -> any, onDelet
 		local deleted = {}
 
 		-- recursively iterate over the last map and check if the file is in the current map (so do NOT use fs.exists)
-
 		local function checkDeleted(map: fileMap, comparisonMap: fileMap)
 			for _, child in map.children do
 				if type(child) == "string" and table.find(comparisonMap.children, child) == nil then
