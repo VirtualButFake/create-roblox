@@ -19,7 +19,7 @@ end
 local function recursiveCopy(src, dest)
 	local files = fs.readDir(src)
 
-	for _, file in ipairs(files) do
+	for _, file in files do
 		local path = src .. "/" .. file
 		local meta = fs.metadata(path)
 

@@ -19,7 +19,7 @@ end
 local function recursiveCopy(src, dest)
 	local files = fs.readDir(src)
 
-	for _, file in ipairs(files) do
+	for _, file in files do
 		local path = src .. "/" .. file
 		local meta = fs.metadata(path)
 
@@ -50,7 +50,7 @@ execCommandWrapper("rojo", { "sourcemap", "default.project.json", "-o", "sourcem
 
 if hasDarkLua then
 	process.env.RBLX_DEV = "this value should be taken out of the code"
-	executeCommand("darklua", { "process", "src", "dist" })
+	execCommandWrapper("darklua", { "process", "src", "dist" })
 end
 
 -- get rid of stories; no need for those to be in the actual build

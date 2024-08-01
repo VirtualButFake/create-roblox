@@ -9,14 +9,13 @@ local executeCommand = require("./lib/executeCommand")
 local function recursiveCopy(src, dest)
 	local files = fs.readDir(src)
 
-	for _, file in ipairs(files) do
+	for _, file in files do
 		local path = src .. "/" .. file
-		local meta = fs.metadata(path)
 
-		if meta.kind == "file" then
+		if fs.isFile(path) then
 			fs.writeDir(dest)
 			fs.writeFile(`{dest}/{file}`, fs.readFile(path))
-		elseif meta.kind == "dir" then
+		elseif fs.isDir(path) then
 			recursiveCopy(path, `{dest}/{file}`)
 		end
 	end
@@ -32,11 +31,18 @@ local function processFiles()
 
 	if fs.isFile(".darklua.json") then
 		-- clone src as build
-		recursiveCopy("src", "dist")
-		executeCommand("rojo", { "sourcemap", `{buildPath}.project.json`, "-o", "sourcemap.json" })
+		recursiveCopy("src", "temp")
+		executeCommand("rojo", { "sourcemap", "default.project.json", "-o", "sourcemap.json" })
 
 		process.env.RBLX_DEV = "true"
-		executeCommand("darklua", { "process", "dist", "dist" })
+		local status = executeCommand("darklua", { "process", "src", "temp" })
+
+        if status.code == 0 then
+            logger:error("Did not update files due to Darklua error, check console for more information.")
+			recursiveCopy("temp", "dist")
+		end
+
+        fs.removeDir("temp")
 	end
 end
 
@@ -48,7 +54,19 @@ task.spawn(fileWatcher, "./src", function(files)
 	logger:info(`Detected changes in {#files} file(s)..`)
 	processFiles()
 end, function(files)
-	logger:info(`Detected {#files} deleted files, deleting from build..`)
+    for _, file in files do
+        logger:info(`{file} deleted, removing from build..`)
+
+        if file:sub(1, 6) == "./src/" then
+            file = file:sub(7)
+        end
+
+        if fs.isFile(`dist/{file}`) then
+            fs.removeFile(`dist/{file}`)
+        elseif fs.isDir(`dist/{file}`) then
+            fs.removeDir(`dist/{file}`)
+        end
+    end
 end)
 
 executeCommand("rojo", { "serve", `{buildPath}.project.json` }, {

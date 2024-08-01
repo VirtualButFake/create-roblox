@@ -9,7 +9,7 @@ end
 
 executeCommand("wally", {
 	"install",
-})
+}, nil, true)
 
 if not fs.isDir("packages") then 
     fs.writeDir("packages")

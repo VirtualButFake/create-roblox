@@ -18,7 +18,7 @@ return function(directory: string, callback: (files: { string }) -> any, onDelet
 		local files = fs.readDir(dir)
 		local modified = {}
 
-		for _, file in ipairs(files) do
+		for _, file in files do
 			local path = dir .. "/" .. file
 			local meta = fs.metadata(path)
 
@@ -36,7 +36,7 @@ return function(directory: string, callback: (files: { string }) -> any, onDelet
 			elseif meta.kind == "dir" then
 				local subModified = scanFiles(path, childValue :: fileMap)
 
-				for _, subPath in ipairs(subModified) do
+				for _, subPath in subModified do
 					table.insert(modified, subPath)
 				end
 			end
@@ -54,8 +54,8 @@ return function(directory: string, callback: (files: { string }) -> any, onDelet
 		local modified = scanFiles(directory, currentMap)
 
 		if #modified > 0 then
+			lastModified = date.now().unixTimestamp -- placing this statement below could result in updates being skipped
 			callback(modified)
-			lastModified = date.now().unixTimestamp
 		elseif lastModified == nil then
 			lastModified = date.now().unixTimestamp - 3
 		end
@@ -69,28 +69,28 @@ return function(directory: string, callback: (files: { string }) -> any, onDelet
 				if type(child) == "string" and table.find(comparisonMap.children, child) == nil then
 					table.insert(deleted, child)
 				elseif type(child) == "table" then
-                    local found = false
+					local found = false
 
 					for _, comparisonChild in comparisonMap.children do
 						if type(comparisonChild) == "table" and comparisonChild.path == child.path then
-                            found = true
+							found = true
 							checkDeleted(child, comparisonChild)
 							break
 						end
 					end
 
-                    if not found then
-                        table.insert(deleted, child.path)
-                    end
+					if not found then
+						table.insert(deleted, child.path)
+					end
 				end
 			end
 		end
 
 		checkDeleted(lastMap, currentMap)
 
-        if #deleted > 0 then
-            onDelete(deleted)
-        end
+		if #deleted > 0 then
+			onDelete(deleted)
+		end
 
 		lastMap = currentMap
 		task.wait(1)
