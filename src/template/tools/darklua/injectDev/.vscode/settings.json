@@ -1,0 +1,5 @@
+{
+    "luau-lsp.types.definitionFiles": [
+        ".vscode/type_definitions.d.luau"
+    ]
+}

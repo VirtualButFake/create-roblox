@@ -9,15 +9,15 @@
 				"$path": "{{ package_path }}"
 			},
 			"client": {
-				"$path": "build/client"
+				"$path": "dist/client"
 			},
 			"common": {
-				"$path": "build/common"
+				"$path": "dist/common"
 			}
 		},
 		"ServerScriptService": {
 			"server": {
-				"$path": "build/server"
+				"$path": "dist/server"
 			}
 		}
 	}

@@ -3,15 +3,31 @@ import os from "os";
 import { ProjectSettings } from "../../cli.js";
 import { executeCommand, getTemplateData, writeTemplate } from "../../utils.js";
 
+// this looks REALLY ugly, but the weird formatting is needed for the snippet to work
+const replaceSnippet = `"./Packages",
+	})`;
+
+const addSnippet = `
+
+	fs.move("./Packages", "./packages", true)`;
+
 export default async function (settings: ProjectSettings) {
 	if (!settings.tools.find((tool) => tool === "wally")) return;
 	if (!settings.wallyMods) return;
 
 	await writeTemplate(["tools", "wally", "base"]);
 
-	for (const mod of settings.wallyMods) {
-		await writeTemplate(["tools", "wally", mod]);
-	}
+	fs.writeFileSync(
+		"./temp/.lune/install-packages.luau",
+		fs
+			.readFileSync("./temp/.lune/install-packages.luau", "utf-8")
+			.replace(
+				replaceSnippet,
+				settings.wallyMods.includes("lowercaseNames")
+					? `${replaceSnippet} ${addSnippet}`
+					: replaceSnippet
+			)
+	);
 
 	const wallyPackages = getTemplateData().packages;
 
@@ -27,7 +43,7 @@ export default async function (settings: ProjectSettings) {
 		)}`
 	);
 
-	await executeCommand("lune", ["run", "scripts/install-packages"], {
+	await executeCommand("lune", ["run", "install-packages"], {
 		cwd: "./temp",
 		stdio: "inherit",
 	});

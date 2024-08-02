@@ -24,7 +24,7 @@ async function main() {
 		await script(settings);
 	}
 
-	executeCommand("lune", ["run", "scripts/build"], {
+	executeCommand("lune", ["run", "build"], {
 		cwd: "./temp",
 		stdio: "inherit",
 	});

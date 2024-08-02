@@ -144,7 +144,7 @@ export default async function () {
 							name: "packages",
 							message: "Would you like to install any packages?",
 							choices: availablePackages,
-							when: () => availablePackages.length > 0,
+							when: () => availablePackages.length > 0 && answer.includes("darklua"),
 						},
 					]);
 				}
