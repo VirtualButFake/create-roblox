@@ -39,8 +39,8 @@ if not fs.isDir("packages") and not fs.isDir("Packages") and fs.isFile("wally.to
 end
 
 local hasDarkLua = fs.isFile(".darklua.json")
-local buildPath = hasDarkLua and "build" or "default"
 
+-- isolating this to just darklua would make sense, however that would require having a new project file just for this, which I don't feel like is worth it
 recursiveCopy("src", "dist")
 execCommandWrapper("rojo", { "sourcemap", "default.project.json", "-o", "sourcemap.json" })
 
@@ -55,7 +55,7 @@ if fs.isDir("dist/ui/stories") then
 end
 
 if not didError then
-	execCommandWrapper("rojo", { "build", `{buildPath}.project.json`, "-o", "build.rbxm" })
+	execCommandWrapper("rojo", { "build", "default.project.json", "-o", "build.rbxm" })
 	logger:success("Build complete!")
 else 
     logger:error("Build failed due to errors.")
