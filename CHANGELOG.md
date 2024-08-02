@@ -1,3 +1,7 @@
+# v0.3.7
+Fixes
+- Made `Packages` folder renaming slightly more robust as it was breaking
+
 # v.0.3.6 
 Fixes
 - Fix typo in project files that I somehow missed.. 

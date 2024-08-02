@@ -32,7 +32,7 @@ if fs.isDir("Packages") then
 		"--sourcemap",
 		"sourcemap.json",
 		"./Packages",
-	})
+	}) -- OPTIONAL_RENAME_STATEMENT
 end
 
 logger:info("Installed packages!")

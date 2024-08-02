@@ -1,15 +1,16 @@
 import fs from "fs";
 import os from "os";
 import { ProjectSettings } from "../../cli.js";
-import { executeCommand, getTemplateData, writeTemplate, getPackagePath } from "../../utils.js";
-
-// this looks REALLY ugly, but the weird formatting is needed for the snippet to work
-const replaceSnippet = `"./Packages",
-	})`;
+import {
+	executeCommand,
+	getTemplateData,
+	writeTemplate,
+	getPackagePath,
+} from "../../utils.js";
 
 const addSnippet = `
 
-	fs.move("./Packages", "./packages", true)`;
+    fs.move("./Packages", "./packages", true)`;
 
 export default async function (settings: ProjectSettings) {
 	if (!settings.tools.find((tool) => tool === "wally")) return;
@@ -18,28 +19,25 @@ export default async function (settings: ProjectSettings) {
 	await writeTemplate(["tools", "wally", "base"]);
 	await writeTemplate(["tools", "wally", settings.projectType]);
 
-    for (const file of fs.readdirSync("./temp")) {
-        if (file.endsWith(".project.json")) {
-            fs.writeFileSync(
-                `./temp/${file}`,
-                fs
-                    .readFileSync(`./temp/${file}`, "utf-8")
-                    .replaceAll("{{ project_name }}", settings.projectName)
-                    .replaceAll("{{ package_path }}", getPackagePath(settings))
-            );
-        
-        }
-    }
+	for (const file of fs.readdirSync("./temp")) {
+		if (file.endsWith(".project.json")) {
+			fs.writeFileSync(
+				`./temp/${file}`,
+				fs
+					.readFileSync(`./temp/${file}`, "utf-8")
+					.replaceAll("{{ project_name }}", settings.projectName)
+					.replaceAll("{{ package_path }}", getPackagePath(settings))
+			);
+		}
+	}
 
 	fs.writeFileSync(
 		"./temp/.lune/install-packages.luau",
 		fs
 			.readFileSync("./temp/.lune/install-packages.luau", "utf-8")
 			.replace(
-				replaceSnippet,
-				settings.wallyMods.includes("lowercaseNames")
-					? `${replaceSnippet} ${addSnippet}`
-					: replaceSnippet
+				"-- OPTIONAL_RENAME_STATEMENT",
+				settings.wallyMods.includes("lowercaseNames") ? addSnippet : ""
 			)
 	);
 
