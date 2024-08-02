@@ -4,10 +4,6 @@
 	"tree": {
 		"$className": "DataModel",
 		"ReplicatedStorage": {
-			"Packages": {
-				"$className": "Folder",
-				"$path": "{{ package_path }}"
-			},
 			"client": {
 				"$path": "dist/client"
 			},

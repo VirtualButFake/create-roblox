@@ -1,0 +1,10 @@
+{
+    "tree": {
+        "ReplicatedStorage": {
+            "Packages": {
+                "$className": "Folder",
+                "$path": "{{ package_path }}"
+            }
+        }
+    }
+}

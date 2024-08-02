@@ -27,7 +27,7 @@ local function processFiles()
 	if fs.isFile(".darklua.json") then
 		-- clone src as build
 		recursiveCopy("src", "temp")
-		executeCommand("rojo", { "sourcemap", "default.project.json", "-o", "sourcemap.json" })
+		executeCommand("rojo", { "sourcemap", "sourcemap.project.json", "-o", "sourcemap.json" })
 
         -- optionally, place custom processing steps here. these steps should modify files in the temp directory
 

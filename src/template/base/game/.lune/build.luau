@@ -43,7 +43,6 @@ if not fs.isDir("packages") and not fs.isDir("Packages") and fs.isFile("wally.to
 end
 
 local hasDarkLua = fs.isFile(".darklua.json")
-local buildPath = hasDarkLua and "build" or "default"
 
 recursiveCopy("src", "dist")
 execCommandWrapper("rojo", { "sourcemap", "default.project.json", "-o", "sourcemap.json" })
@@ -59,7 +58,7 @@ if fs.isDir("dist/client/ui/stories") then
 end
 
 if not didError then
-	execCommandWrapper("rojo", { "build", `{buildPath}.project.json`, "-o", "build.rbxl" })
+	execCommandWrapper("rojo", { "build", "build.project.json", "-o", "build.rbxl" })
 	logger:success("Build complete!")
 else
 	logger:error("Build failed due to errors.")

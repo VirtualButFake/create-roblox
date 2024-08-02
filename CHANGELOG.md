@@ -1,3 +1,8 @@
+# v0.3.3
+Fixes
+- Actually fix the issue in 0.3.1 (I promise I totaaaally didn't forget to build before publishing)
+- Fix issue where `packages` folder is included in project file even when wally is not used
+
 # v0.3.1
 Fixes
 - Fixed issue with package building where a nonexistent project file would cause the build to fail.

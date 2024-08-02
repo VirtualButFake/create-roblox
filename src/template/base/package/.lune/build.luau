@@ -42,7 +42,7 @@ local hasDarkLua = fs.isFile(".darklua.json")
 
 -- isolating this to just darklua would make sense, however that would require having a new project file just for this, which I don't feel like is worth it
 recursiveCopy("src", "dist")
-execCommandWrapper("rojo", { "sourcemap", "default.project.json", "-o", "sourcemap.json" })
+execCommandWrapper("rojo", { "sourcemap", "sourcemap.project.json", "-o", "sourcemap.json" })
 
 if hasDarkLua then
 	process.env.RBLX_DEV = "this value should be taken out of the code"

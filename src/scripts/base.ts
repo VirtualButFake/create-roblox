@@ -26,10 +26,6 @@ export default async function (settings: ProjectSettings) {
 			.replaceAll("{{ project_name }}", settings.projectName)
 	);
 
-	if (!settings.tools.find((tool) => tool === "darklua") && settings.projectType == "game") {
-		fs.unlinkSync("./temp/build.project.json");
-	}
-
     if (!settings.tools.find((tool) => tool === "darklua") && settings.projectType == "package") {
         // replace "build" with "src" in dev.project.json and default.project.json
         for (const file of ["dev.project.json", "default.project.json"]) {
