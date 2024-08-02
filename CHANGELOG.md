@@ -1,3 +1,7 @@
+# v0.3.5
+Fixes
+- Fix typo where packages would use data from the wrong directory
+
 # v0.3.4
 Fixes
 - Fix issue where src/output was ignored when building packages that don't use Wally
