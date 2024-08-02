@@ -2,9 +2,11 @@
 
 # create-roblox
 
-A flexible and straightforward template CLI for Roblox projects, inspired by [roblox-project-template](https://github.com/grilme99/roblox-project-template/tree/main)  
+A flexible and straightforward template CLI for Roblox projects, inspired by [roblox-project-template](https://github.com/grilme99/roblox-project-template/tree/main)
 
 [![CI](https://github.com/virtualbutfake/create-roblox/actions/workflows/ci.yml/badge.svg)](https://github.com/virtualbutfake/create-roblox/actions)
+[![License](https://img.shields.io/github/license/virtualbutfake/create-roblox)](https://github.com/VirtualButFake/create-roblox/blob/master/LICENSE.md)
+
 </div>
 
 ## Why create-roblox?
@@ -38,4 +40,5 @@ A flexible and straightforward template CLI for Roblox projects, inspired by [ro
 2. Follow the generated README for instructions, and you're good to go!
 
 ## Contributions
+
 Contributions are always welcomed; I can't keep this up to date myself forever, so if there are any packages/tools/whatever that are deemed worth adding, feel free to open a PR!
