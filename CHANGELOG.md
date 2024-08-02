@@ -1,3 +1,7 @@
+# v.0.3.6 
+Fixes
+- Fix typo in project files that I somehow missed.. 
+
 # v0.3.5
 Fixes
 - Fix typo where packages would use data from the wrong directory

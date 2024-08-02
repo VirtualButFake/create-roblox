@@ -5,7 +5,7 @@
 		"ReplicatedStorage": {
 			"Packages": {
                 "$className": "Folder",
-				"project-test": {
+				"{{ project_name }": {
 					"$path": "src"
 				}
 			}
