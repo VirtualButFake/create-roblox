@@ -21,11 +21,15 @@ local function recursiveCopy(src, dest)
 	end
 end
 
+local hasDarkLua = fs.isFile(".darklua.json")
+
 local function processFiles()
 	if fs.isFile(".darklua.json") then
 		-- clone src as build
 		recursiveCopy("src", "temp")
 		executeCommand("rojo", { "sourcemap", "default.project.json", "-o", "sourcemap.json" })
+
+        -- optionally, place custom processing steps here. these steps should modify files in the temp directory
 
 		process.env.RBLX_DEV = "true"
 		local status = executeCommand("darklua", { "process", "src", "temp" })
@@ -48,6 +52,10 @@ task.spawn(fileWatcher, "./src", function(files)
 	logger:info(`Detected changes in {#files} file(s)..`)
 	processFiles()
 end, function(files)
+    if not hasDarkLua then
+        return
+    end
+
     for _, file in files do
         logger:info(`{file} deleted, removing from build..`)
 
