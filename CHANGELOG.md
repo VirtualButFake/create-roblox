@@ -1,3 +1,7 @@
+# v0.3.1
+Fixes
+- Fixed issue with package building where a nonexistent project file would cause the build to fail.
+
 # v0.3.0
 
 Additions:
