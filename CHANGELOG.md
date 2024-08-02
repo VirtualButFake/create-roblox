@@ -1,3 +1,7 @@
+# v0.3.4
+Fixes
+- Fix issue where src/output was ignored when building packages that don't use Wally
+
 # v0.3.3
 Fixes
 - Actually fix the issue in 0.3.1 (I promise I totaaaally didn't forget to build before publishing)

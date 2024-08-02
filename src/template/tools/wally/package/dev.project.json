@@ -2,10 +2,7 @@
 	"tree": {
 		"ReplicatedStorage": {
 			"Packages": {
-				"$path": "{{ package_path }}",
-				"project-test": {
-					"$path": "dist"
-				}
+				"$path": "{{ package_path }}"
 			}
 		}
 	}

@@ -2,6 +2,13 @@
 	"name": "{{ project_name }}",
 	"tree": {
 		"$className": "DataModel",
-		"ReplicatedStorage": {}
+		"ReplicatedStorage": {
+			"Packages": {
+                "$className": "Folder",
+				"project-test": {
+					"$path": "dist"
+				}
+			}
+		}
 	}
 }
