@@ -1,3 +1,8 @@
+# v0.3.8
+Fixes
+- Template application is now done asynchronously
+- Ignore `.lune` directory in Luau LSP
+
 # v0.3.7
 Fixes
 - Made `Packages` folder renaming slightly more robust as it was breaking

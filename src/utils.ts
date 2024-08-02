@@ -97,42 +97,48 @@ export async function writeToFolder(
 	source: string,
 	overwrite: boolean
 ) {
-	const files = fs.readdirSync(source);
+	const files = await fs.promises.readdir(source);
 
 	for (const file of files) {
-		const folderPath = `${folder}/${file}`;
-		const sourcePath = `${source}/${file}`;
+		const folderPath = path.join(folder, file);
+		const sourcePath = path.join(source, file);
 
 		if (file.startsWith(".template")) {
 			await applyTemplateConfig(sourcePath, file);
 			continue;
 		}
 
-		if (fs.lstatSync(sourcePath).isDirectory()) {
+		const sourceStats = await fs.promises.lstat(sourcePath);
+
+		if (sourceStats.isDirectory()) {
 			if (!fs.existsSync(folderPath)) {
-				fs.mkdirSync(folderPath);
+				await fs.promises.mkdir(folderPath);
 			}
 
 			await writeToFolder(folderPath, sourcePath, overwrite);
 		} else {
 			if (!fs.existsSync(folderPath)) {
-				fs.copyFileSync(sourcePath, folderPath);
+				await fs.promises.copyFile(sourcePath, folderPath);
 			} else if (overwrite) {
 				if (path.extname(sourcePath) === ".json") {
-					const sourceJson = JSON.parse(fs.readFileSync(sourcePath, "utf-8"));
-					const folderJson = JSON.parse(fs.readFileSync(folderPath, "utf-8"));
+					const sourceJson = JSON.parse(
+						await fs.promises.readFile(sourcePath, "utf-8")
+					);
+					const folderJson = JSON.parse(
+						await fs.promises.readFile(folderPath, "utf-8")
+					);
 					const merged = JSON.stringify(
 						await merge(folderJson, sourceJson),
 						null,
 						4
 					);
 
-					fs.writeFileSync(folderPath, merged);
+					await fs.promises.writeFile(folderPath, merged);
 					continue;
 				}
 
-				fs.rmSync(folderPath);
-				fs.copyFileSync(sourcePath, folderPath);
+				await fs.promises.rm(folderPath);
+				await fs.promises.copyFile(sourcePath, folderPath);
 			}
 		}
 	}
