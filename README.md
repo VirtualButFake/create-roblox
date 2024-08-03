@@ -42,3 +42,7 @@ A flexible and straightforward template CLI for Roblox projects, inspired by [ro
 ## Contributions
 
 Contributions are always welcomed; I can't keep this up to date myself forever, so if there are any packages/tools/whatever that are deemed worth adding, feel free to open a PR!
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/virtualbutfake/fusion-autocomplete/blob/master/LICENSE.md) file for details.
