@@ -1,3 +1,7 @@
+# v0.3.9
+Fixes
+- Add `dist` and `packages`/`Packages` to Luau LSP ignore list as it tends to ignore `.gitignore` directories
+
 # v0.3.8
 Fixes
 - Template application is now done asynchronously
