@@ -1,3 +1,7 @@
+# v0.3.10
+Fixes
+- Wrap `processFiles` in a pcall to prevent errors from crashing the entire file watcher
+
 # v0.3.9
 Fixes
 - Add `dist` and `packages`/`Packages` to Luau LSP ignore list as it tends to ignore `.gitignore` directories

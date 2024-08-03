@@ -50,7 +50,14 @@ logger:success("Watching for file changes..")
 
 task.spawn(fileWatcher, "./src", function(files)
 	logger:info(`Detected changes in {#files} file(s)..`)
-	processFiles()
+    
+	local success, err = pcall(function()
+		processFiles()
+	end)
+
+	if not success then
+		logger:error(`Failed to process files: {err}`)
+	end
 end, function(files)
     if not hasDarkLua then
         return
