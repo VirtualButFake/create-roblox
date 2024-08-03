@@ -1,9 +1,5 @@
 {
 	"tree": {
-		"ReplicatedStorage": {
-			"Packages": {
-				"$path": "{{ package_path }}"
-			}
-		}
-	}   
+		"$path": "{{ package_path }}"
+	}
 }

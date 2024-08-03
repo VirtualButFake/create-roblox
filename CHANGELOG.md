@@ -1,3 +1,7 @@
+# v0.3.11
+Fixes
+- `sourcemap.project.json` on packages now correctly generate sourcemaps without a datamodel for accurate require paths
+
 # v0.3.10
 Fixes
 - Wrap `processFiles` in a pcall to prevent errors from crashing the entire file watcher
