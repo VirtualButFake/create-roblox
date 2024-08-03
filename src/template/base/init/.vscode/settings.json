@@ -3,6 +3,6 @@
     "luau-lsp.ignoreGlobs": [
         ".lune/**",
         "dist/**",
-        "[Pp]ackages/**",
+        "[Pp]ackages/**"
     ]
 }

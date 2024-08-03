@@ -1,3 +1,7 @@
+# v0.3.12
+Fixes
+- Fix JSON error in Luau LSP config
+
 # v0.3.11
 Fixes
 - `sourcemap.project.json` on packages now correctly generate sourcemaps without a datamodel for accurate require paths
