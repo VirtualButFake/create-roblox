@@ -1,3 +1,7 @@
+# v0.3.13
+Fixes
+- Add `main` to the CI workflow (I forgot repositories are created with the default branch as `main` now)
+
 # v0.3.12
 Fixes
 - Fix JSON error in Luau LSP config
