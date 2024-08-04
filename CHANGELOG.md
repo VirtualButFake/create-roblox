@@ -1,3 +1,7 @@
+# v0.3.14
+Changes
+- Rename CI workflow to `CI` to ensure that badges don't get too large
+
 # v0.3.13
 Fixes
 - Add `main` to the CI workflow (I forgot repositories are created with the default branch as `main` now)
