@@ -1,5 +1,5 @@
 {
-	"tree": {
-		"$path": "{{ package_path }}"
-	}
+    "tree": {
+        "$path": "{{ package_path }}"
+    }
 }

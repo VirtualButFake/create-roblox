@@ -1,5 +1,5 @@
 {
-	"tools": {
-		"stylua": "JohnnyMorganz/StyLua@0.20.0"
-	}
+    "tools": {
+        "stylua": "JohnnyMorganz/StyLua@0.20.0"
+    }
 }

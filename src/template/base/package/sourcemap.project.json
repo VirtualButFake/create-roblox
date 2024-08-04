@@ -1,9 +1,9 @@
 {
-	"name": "{{ project_name }}",
-	"tree": {
-		"$className": "Folder",
-		"{{ project_name }}": {
-			"$path": "src"
-		}
-	}
+    "name": "{{ project_name }}",
+    "tree": {
+        "$className": "Folder",
+        "{{ project_name }}": {
+            "$path": "src"
+        }
+    }
 }

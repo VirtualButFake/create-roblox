@@ -1,14 +1,14 @@
 {
-	"tree": {
-		"ReplicatedStorage": {
-			"network": {
-				"$path": ".zap/client.lua"
-			}
-		},
-		"ServerScriptService": {
-			"network": {
-				"$path": ".zap/server.lua"
-			}
-		}
-	}
+    "tree": {
+        "ReplicatedStorage": {
+            "network": {
+                "$path": ".zap/client.lua"
+            }
+        },
+        "ServerScriptService": {
+            "network": {
+                "$path": ".zap/server.lua"
+            }
+        }
+    }
 }

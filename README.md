@@ -41,7 +41,8 @@ A flexible and straightforward template CLI for Roblox projects, inspired by [ro
 
 ## Contributions
 
-Contributions are always welcomed; I can't keep this up to date myself forever, so if there are any packages/tools/whatever that are deemed worth adding, feel free to open a PR!
+Contributions are always welcomed; I can't keep this up to date myself forever, so if there are any packages/tools/whatever that are deemed worth adding, feel free!
+Code should follow the Prettier and ESLint rules for this repository. To contribute, fork this repository, make your changes, and create a pull request. Please make sure to test your changes before creating a pull request.
 
 ## License
 

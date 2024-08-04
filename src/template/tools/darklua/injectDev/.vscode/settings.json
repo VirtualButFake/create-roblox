@@ -1,5 +1,3 @@
 {
-    "luau-lsp.types.definitionFiles": [
-        ".vscode/type_definitions.d.luau"
-    ]
+    "luau-lsp.types.definitionFiles": [".vscode/type_definitions.d.luau"]
 }

@@ -1,10 +1,10 @@
-import { ProjectSettings } from "../cli.js";
-import { writeTemplate } from "../utils.js";
+import { ProjectSettings } from '../cli.js';
+import { writeTemplate } from '../utils.js';
 
 export default async function (settings: ProjectSettings) {
-	if (!settings.packages) return;
+    if (!settings.packages) return;
 
-	for (const pkg of settings.packages) {
-		await writeTemplate(["packages", pkg]);
-	}
+    for (const pkg of settings.packages) {
+        await writeTemplate(['packages', pkg]);
+    }
 }

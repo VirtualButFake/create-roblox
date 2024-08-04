@@ -1,9 +1,9 @@
 {
-	"rules": [
-		{
-			"rule": "inject_global_value",
-			"identifier": "__DEV__",
-			"env": "RBLX_DEV"
-		}
-	]
+    "rules": [
+        {
+            "rule": "inject_global_value",
+            "identifier": "__DEV__",
+            "env": "RBLX_DEV"
+        }
+    ]
 }

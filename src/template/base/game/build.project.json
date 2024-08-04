@@ -1,20 +1,20 @@
 {
-	"name": "{{ project_name }}",
-	"emitLegacyScripts": false,
-	"tree": {
-		"$className": "DataModel",
-		"ReplicatedStorage": {
-			"client": {
-				"$path": "dist/client"
-			},
-			"common": {
-				"$path": "dist/common"
-			}
-		},
-		"ServerScriptService": {
-			"server": {
-				"$path": "dist/server"
-			}
-		}
-	}
+    "name": "{{ project_name }}",
+    "emitLegacyScripts": false,
+    "tree": {
+        "$className": "DataModel",
+        "ReplicatedStorage": {
+            "client": {
+                "$path": "dist/client"
+            },
+            "common": {
+                "$path": "dist/common"
+            }
+        },
+        "ServerScriptService": {
+            "server": {
+                "$path": "dist/server"
+            }
+        }
+    }
 }

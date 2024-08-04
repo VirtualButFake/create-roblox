@@ -1,14 +1,14 @@
 {
-	"name": "{{ project_name }}",
-	"tree": {
-		"$className": "DataModel",
-		"ReplicatedStorage": {
-			"Packages": {
+    "name": "{{ project_name }}",
+    "tree": {
+        "$className": "DataModel",
+        "ReplicatedStorage": {
+            "Packages": {
                 "$className": "Folder",
-				"{{ project_name }}": {
-					"$path": "dist"
-				}
-			}
-		}
-	}
+                "{{ project_name }}": {
+                    "$path": "dist"
+                }
+            }
+        }
+    }
 }

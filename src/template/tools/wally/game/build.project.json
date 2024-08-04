@@ -1,10 +1,10 @@
 {
-	"tree": {
-		"ReplicatedStorage": {
-			"Packages": {
-				"$className": "Folder",
-				"$path": "{{ package_path }}"
-			}
-		}
-	}
+    "tree": {
+        "ReplicatedStorage": {
+            "Packages": {
+                "$className": "Folder",
+                "$path": "{{ package_path }}"
+            }
+        }
+    }
 }

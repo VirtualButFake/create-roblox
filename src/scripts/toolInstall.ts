@@ -1,57 +1,57 @@
-import { ProjectSettings } from "../cli.js";
-import { runBinary, executeCommand, getTemplateData } from "../utils.js";
-import fs from "fs";
-import logger from "../logger.js";
+import { ProjectSettings } from '../cli.js';
+import { runBinary, executeCommand, getTemplateData } from '../utils.js';
+import fs from 'fs';
+import logger from '../logger.js';
 
 let setupRan = false;
 
 export default async function (settings: ProjectSettings) {
-	if (!setupRan) {
-		try {
-			await executeCommand("aftman", ["--version"]);
-		} catch (err) {
-			logger.info("Did not find Aftman, installing..");
-			await runBinary("aftman", "aftman", ["self-install"], {
-				stdio: "inherit",
-				cwd: "./temp",
-			});
-		}
+    if (!setupRan) {
+        try {
+            await executeCommand('aftman', ['--version']);
+        } catch (err) {
+            logger.info('Did not find Aftman, installing..');
+            await runBinary('aftman', 'aftman', ['self-install'], {
+                stdio: 'inherit',
+                cwd: './temp',
+            });
+        }
 
-		try {
-			await executeCommand("aftman", ["init"], {
-				cwd: "./temp",
-				stdio: "inherit",
-			});
-		} catch (err) {
-			logger.error("Failed to initialize Aftman:");
-			throw err;
-		}
-	}
+        try {
+            await executeCommand('aftman', ['init'], {
+                cwd: './temp',
+                stdio: 'inherit',
+            });
+        } catch (err) {
+            logger.error('Failed to initialize Aftman:');
+            throw err;
+        }
+    }
 
-	const configString = `[tools]\n${Object.entries(getTemplateData().tools)
-		.map(([tool, version]) => `${tool} = "${version}"`)
-		.join("\n")}`;
+    const configString = `[tools]\n${Object.entries(getTemplateData().tools)
+        .map(([tool, version]) => `${tool} = "${version}"`)
+        .join('\n')}`;
 
-	fs.writeFileSync("./temp/aftman.toml", configString);
+    fs.writeFileSync('./temp/aftman.toml', configString);
 
-	try {
-		const response = await executeCommand(
-			"aftman",
-			["install", "--no-trust-check"],
-			{
-				cwd: "./temp",
-			}
-		);
+    try {
+        const response = await executeCommand(
+            'aftman',
+            ['install', '--no-trust-check'],
+            {
+                cwd: './temp',
+            }
+        );
 
-		if (response.status !== 0) {
-			throw response.stderr.toString();
-		}
-	} catch (err) {
-		logger.error("Failed to install tools with Aftman:");
-		throw err;
-	}
+        if (response.status !== 0) {
+            throw response.stderr.toString();
+        }
+    } catch (err) {
+        logger.error('Failed to install tools with Aftman:');
+        throw err;
+    }
 
-	if (setupRan) logger.info("Installed tools with Aftman");
+    if (setupRan) logger.info('Installed tools with Aftman');
 
-	setupRan = true;
+    setupRan = true;
 }

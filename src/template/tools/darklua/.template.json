@@ -1,5 +1,5 @@
 {
-	"tools": {
-		"darklua": "seaofvoices/darklua@0.13.1"
-	}
+    "tools": {
+        "darklua": "seaofvoices/darklua@0.13.1"
+    }
 }
