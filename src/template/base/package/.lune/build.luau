@@ -7,13 +7,13 @@ local executeCommand = require("./lib/executeCommand")
 local didError = false
 
 local function execCommandWrapper(...)
-    local data = executeCommand(...)
+	local data = executeCommand(...)
 
-    if data.stderr ~= "" then
-        didError = true
-    end
+	if data.stderr ~= "" then
+		didError = true
+	end
 
-    return data
+	return data
 end
 
 local function recursiveCopy(src, dest)
@@ -25,9 +25,7 @@ local function recursiveCopy(src, dest)
 
 		if meta.kind == "file" then
 			fs.writeDir(dest)
-
-            local content = fs.readFile(path):gsub("__DEV__", "false")
-			fs.writeFile(`{dest}/{file}`, content)
+			fs.writeFile(`{dest}/{file}`, fs.readFile(path))
 		elseif meta.kind == "dir" then
 			recursiveCopy(path, `{dest}/{file}`)
 		end
@@ -57,6 +55,6 @@ end
 if not didError then
 	execCommandWrapper("rojo", { "build", "default.project.json", "-o", "build.rbxm" })
 	logger:success("Build complete!")
-else 
-    logger:error("Build failed due to errors.")
+else
+	logger:error("Build failed due to errors.")
 end

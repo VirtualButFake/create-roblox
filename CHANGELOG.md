@@ -1,3 +1,7 @@
+# v0.3.16
+Fixes
+- Removed unnecessary code from `build` script
+
 # v0.3.15
 Fixes
 - Fix `__DEV__` global properly
