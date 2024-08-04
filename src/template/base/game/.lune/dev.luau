@@ -37,7 +37,7 @@ local function processFiles()
 		-- optionally, place custom processing steps here. these steps should modify files in the temp directory
 
 		process.env.RBLX_DEV = "true"
-		local status = executeCommand("darklua", { "process", "src", "temp" })
+		local status = executeCommand("darklua", { "process", "src", "temp", "-c", "{{ darklua_config_dev }}" })
 
 		if status.code == 0 then
 			recursiveCopy("temp", "dist")
@@ -55,7 +55,7 @@ logger:success("Watching for file changes..")
 
 task.spawn(fileWatcher, "./src", function(files)
 	logger:info(`Detected changes in {#files} file(s)..`)
-    
+
 	local success, err = pcall(function()
 		processFiles()
 	end)

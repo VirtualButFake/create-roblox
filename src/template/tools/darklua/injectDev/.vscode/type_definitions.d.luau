@@ -1,1 +1,1 @@
-declare __DEV__: any
+declare __DEV__: boolean

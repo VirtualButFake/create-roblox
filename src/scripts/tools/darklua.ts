@@ -39,5 +39,19 @@ export default async function (settings: ProjectSettings) {
             './temp/.vscode/settings.json',
             JSON.stringify(vscodeConfig, null, 4)
         );
+
+        // set the {{ darklua_config_dev }} string in .lune/dev to ".darklua.json" if "injectDev" is not in the settings. otherwise, set it to ".darklua.dev.json"
+
+        fs.writeFileSync(
+            './temp/.lune/dev.luau',
+            fs
+                .readFileSync('./temp/.lune/dev.luau', 'utf-8')
+                .replace(
+                    '{{ darklua_config_dev }}',
+                    !settings.darkluaMods.includes('injectDev')
+                        ? '.darklua.json'
+                        : '.darklua.dev.json'
+                )
+        );
     }
 }

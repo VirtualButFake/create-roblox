@@ -1,3 +1,7 @@
+# v0.3.15
+Fixes
+- Fix `__DEV__` global properly
+
 # v0.3.14
 Changes
 - Rename CI workflow to `CI` to ensure that badges don't get too large
