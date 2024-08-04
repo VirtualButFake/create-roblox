@@ -5,7 +5,7 @@
 A flexible and straightforward template CLI for Roblox projects, inspired by [roblox-project-template](https://github.com/grilme99/roblox-project-template/tree/main)
 
 [![License](https://img.shields.io/github/license/virtualbutfake/create-roblox)](https://github.com/VirtualButFake/create-roblox/blob/master/LICENSE.md)
-[![CI](https://github.com/virtualbutfake/create-roblox/actions/workflows/ci.yml/badge.svg)](https://github.com/virtualbutfake/create-roblox/actions)
+[![CI](https://github.com/virtualbutfake/create-roblox/actions/workflows/ci.yaml/badge.svg)](https://github.com/virtualbutfake/create-roblox/actions)
 
 </div>
 
