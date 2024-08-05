@@ -1,3 +1,5 @@
+# v0.3.17
+
 # v0.3.16
 Fixes
 - Removed unnecessary code from `build` script
