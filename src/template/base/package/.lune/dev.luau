@@ -1,4 +1,3 @@
-local process = require("@lune/process")
 local fs = require("@lune/fs")
 local task = require("@lune/task")
 
@@ -25,16 +24,12 @@ local hasDarkLua = fs.isFile(".darklua.json")
 
 local function processFiles()
 	if fs.isFile(".darklua.json") then
-		-- clone src as build
-		recursiveCopy("src", "temp")
 		executeCommand("rojo", { "sourcemap", "sourcemap.project.json", "-o", "sourcemap.json" })
 
-		-- optionally, place custom processing steps here. these steps should modify files in the temp directory
-
-		process.env.RBLX_DEV = "true"
 		local status = executeCommand("darklua", { "process", "src", "temp", "-c", "{{ darklua_config_dev }}" })
 
 		if status.code == 0 then
+            -- Optional processing steps here
 			recursiveCopy("temp", "dist")
 		else
 			logger:error("Did not update files due to Darklua error, check console for more information.")

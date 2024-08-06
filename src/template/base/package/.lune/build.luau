@@ -1,4 +1,3 @@
-local process = require("@lune/process")
 local fs = require("@lune/fs")
 
 local logger = require("./lib/logger").new(4)
@@ -38,14 +37,17 @@ end
 
 local hasDarkLua = fs.isFile(".darklua.json")
 
--- isolating this to just darklua would make sense, however that would require having a new project file just for this, which I don't feel like is worth it
-recursiveCopy("src", "dist")
 execCommandWrapper("rojo", { "sourcemap", "sourcemap.project.json", "-o", "sourcemap.json" })
 
 if hasDarkLua then
-	process.env.RBLX_DEV = "this value should be taken out of the code"
-	execCommandWrapper("darklua", { "process", "src", "dist" })
+	execCommandWrapper("darklua", { "process", "src", "temp" })
+else 
+    recursiveCopy("src", "temp")
 end
+
+-- Optional processing steps here
+
+recursiveCopy("temp", "dist")
 
 -- get rid of stories; no need for those to be in the actual build
 if fs.isDir("dist/ui/stories") then

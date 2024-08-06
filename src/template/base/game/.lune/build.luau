@@ -42,13 +42,18 @@ end
 
 local hasDarkLua = fs.isFile(".darklua.json")
 
-recursiveCopy("src", "dist")
 execCommandWrapper("rojo", { "sourcemap", "default.project.json", "-o", "sourcemap.json" })
 
 if hasDarkLua then
 	process.env.RBLX_DEV = "this value should be taken out of the code"
-	execCommandWrapper("darklua", { "process", "src", "dist" })
+	execCommandWrapper("darklua", { "process", "src", "temp" })
+else 
+    recursiveCopy("src", "temp")
 end
+
+-- Optional processing steps here
+
+recursiveCopy("temp", "dist")
 
 -- get rid of stories; no need for those to be in the actual build
 if fs.isDir("dist/client/ui/stories") then
@@ -61,4 +66,3 @@ if not didError then
 else
 	logger:error("Build failed due to errors.")
 end
-.

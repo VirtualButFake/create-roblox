@@ -1,3 +1,8 @@
+# v0.3.18
+Fixes
+- Make `temp` folder work properly
+- Support for optional processing steps on both `dev` and `build` scripts
+
 # v0.3.17
 
 # v0.3.16
