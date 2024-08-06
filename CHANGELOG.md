@@ -4,6 +4,8 @@ Fixes
 - Support for optional processing steps on both `dev` and `build` scripts
 
 # v0.3.17
+Fixes
+- More verbose `install-packages` output 
 
 # v0.3.16
 Fixes
