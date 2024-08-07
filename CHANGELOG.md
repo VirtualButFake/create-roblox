@@ -1,3 +1,7 @@
+# v0.3.19
+Fixes
+- Make Zap games look for the file instead of the directory to work in CD workflows
+
 # v0.3.18
 Fixes
 - Make `temp` folder work properly

@@ -25,7 +25,7 @@ local hasDarkLua = fs.isFile(".darklua.json")
 local buildPath = hasDarkLua and "build" or "default"
 
 local function processFiles()
-	if fs.isDir(".zap") then
+	if fs.isFile("src/server/network.zap") then
 		executeCommand("zap", { "src/server/network.zap" })
 	end
 

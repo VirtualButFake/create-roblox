@@ -32,7 +32,7 @@ local function recursiveCopy(src, dest)
 	end
 end
 
-if fs.isDir(".zap") then
+if fs.isFile("src/server/network.zap") then
 	execCommandWrapper("zap", { "src/server/network.zap" })
 end
 
