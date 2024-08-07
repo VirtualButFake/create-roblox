@@ -1,3 +1,7 @@
+# v0.3.20
+Fixes
+- Fix bug that would not apply darklua configs correctly
+
 # v0.3.19
 Fixes
 - Make Zap games look for the file instead of the directory to work in CD workflows

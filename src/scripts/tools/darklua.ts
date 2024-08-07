@@ -8,16 +8,19 @@ export default async function (settings: ProjectSettings) {
 
     await writeTemplate(['tools', 'darklua', 'base']);
 
-    for (const mod of settings.darkluaMods) {
-        await writeTemplate(['tools', 'darklua', mod]);
-    }
-
     if (settings.darkluaMods.includes('absoluteImports')) {
         const absolutePaths = getTemplateData().absolutePaths;
+
+        for (const mod of settings.darkluaMods) {
+            if (mod === 'injectDev') continue;
+
+            await writeTemplate(['tools', 'darklua', mod]);
+        }
 
         const darkLuaConfig = JSON.parse(
             fs.readFileSync('./temp/.darklua.json', 'utf-8')
         );
+
         const ruleToModify = darkLuaConfig.rules.find(
             (rule: any) =>
                 typeof rule === 'object' && rule.rule === 'convert_require'
@@ -34,6 +37,7 @@ export default async function (settings: ProjectSettings) {
         const vscodeConfig = JSON.parse(
             fs.readFileSync('./temp/.vscode/settings.json', 'utf-8')
         );
+
         vscodeConfig['luau-lsp.require.directoryAliases'] = absolutePaths;
         fs.writeFileSync(
             './temp/.vscode/settings.json',
@@ -41,6 +45,12 @@ export default async function (settings: ProjectSettings) {
         );
 
         // set the {{ darklua_config_dev }} string in .lune/dev to ".darklua.json" if "injectDev" is not in the settings. otherwise, set it to ".darklua.dev.json"
+        if (settings.darkluaMods.includes('injectDev')) {
+            // clone over the darklua config to .darklua.dev.json
+            fs.copyFileSync('./temp/.darklua.json', './temp/.darklua.dev.json');
+
+            await writeTemplate(['tools', 'darklua', 'injectDev']);
+        }
 
         fs.writeFileSync(
             './temp/.lune/dev.luau',
