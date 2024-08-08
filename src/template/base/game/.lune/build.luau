@@ -66,3 +66,5 @@ if not didError then
 else
 	logger:error("Build failed due to errors.")
 end
+
+fs.removeDir("temp")

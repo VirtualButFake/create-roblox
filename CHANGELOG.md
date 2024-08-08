@@ -1,3 +1,7 @@
+# v0.3.21
+Fixes
+- Make builds delete the `temp` folder appropriately.
+
 # v0.3.20
 Fixes
 - Fix bug that would not apply darklua configs correctly
