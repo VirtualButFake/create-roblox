@@ -18,7 +18,7 @@ export default async function (settings: ProjectSettings) {
         [
             'frontend',
             'stories',
-            (settings.ui == 'react' && 'react') || 'generic',
+            settings.ui,
             settings.storybookPlugin,
         ],
         `./temp/src/${settings.projectType === 'game' ? 'client/' : ''}ui`

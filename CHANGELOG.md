@@ -1,3 +1,7 @@
+# 0.3.22
+Changes
+- Add support for new `Fusion` stories in UI Labs
+
 # v0.3.21
 Fixes
 - Make builds delete the `temp` folder appropriately.
