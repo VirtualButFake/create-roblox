@@ -15,12 +15,7 @@ export default async function (settings: ProjectSettings) {
     if (settings.storybookPlugin == 'none') return;
 
     await writeTemplate(
-        [
-            'frontend',
-            'stories',
-            settings.ui,
-            settings.storybookPlugin,
-        ],
+        ['frontend', 'stories', settings.ui, settings.storybookPlugin],
         `./temp/src/${settings.projectType === 'game' ? 'client/' : ''}ui`
     );
 }
