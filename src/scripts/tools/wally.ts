@@ -45,7 +45,7 @@ export default async function (settings: ProjectSettings) {
 
     fs.writeFileSync(
         './temp/wally.toml',
-        `[package]\nname = "${os.userInfo().username}/${settings.projectName
+        `[package]\nname = "${os.userInfo().username.toLowerCase()}/${settings.projectName
             .toLowerCase()
             .replace(
                 /[^a-zA-Z0-9]/g,

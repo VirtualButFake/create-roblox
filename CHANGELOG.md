@@ -1,3 +1,7 @@
+# 0.3.24
+Fixes
+- Convert user profile name to lowercase to prevent Wally breaking
+
 # 0.3.23
 Changes
 - Remove `zap` lune script
