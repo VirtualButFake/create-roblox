@@ -51,7 +51,19 @@ export default async function (settings: ProjectSettings) {
         throw err;
     }
 
-    if (setupRan) logger.info('Installed tools with Aftman');
+    if (setupRan) {
+        if (
+            settings.tools.includes('wally') &&
+            settings.wallyMods != undefined
+        ) {
+            await executeCommand('lune', ['run', 'install-packages'], {
+                cwd: './temp',
+                stdio: 'inherit',
+            });
+        }
+
+        logger.info('Installed tools with Aftman');
+    }
 
     setupRan = true;
 }

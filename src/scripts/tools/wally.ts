@@ -54,9 +54,4 @@ export default async function (settings: ProjectSettings) {
             '\n'
         )}`
     );
-
-    await executeCommand('lune', ['run', 'install-packages'], {
-        cwd: './temp',
-        stdio: 'inherit',
-    });
 }

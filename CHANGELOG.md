@@ -1,3 +1,8 @@
+# 0.3.25
+Fixes
+- Fix Zap breaking in certain installations
+- Fix incorrect Aftman install order, resulting in tools missing in certain installations
+
 # 0.3.24
 Fixes
 - Convert user profile name to lowercase to prevent Wally breaking

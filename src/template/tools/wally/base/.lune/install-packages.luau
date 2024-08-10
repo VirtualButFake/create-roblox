@@ -23,7 +23,7 @@ if not fs.isDir("packages") then
 end
 
 -- do this so the project file doesn't refer to files that don't exist and cause rojo to fail
-if fs.isDir(".zap") then
+if fs.isFile("src/server/network.zap") then
 	executeCommand("zap", { "src/server/network.zap" })
 end
 
@@ -35,11 +35,17 @@ executeCommand("rojo", {
 })
 
 if fs.isDir("Packages") then
-	executeCommand("wally-package-types", {
+	local packageTypeStatus = executeCommand("wally-package-types", {
 		"--sourcemap",
 		"sourcemap.json",
 		"./Packages",
-	}) -- OPTIONAL_RENAME_STATEMENT
+	}, nil, true)
+
+	if packageTypeStatus.ok then
+		logger:info("Successfully generated package types!")
+	else
+		logger:error("Failed to generate package types!")
+	end-- OPTIONAL_RENAME_STATEMENT
 end
 
 logger:info("Installed packages!")
