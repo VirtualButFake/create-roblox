@@ -1,13 +1,13 @@
 {
     "name": "create-roblox",
-    "version": "0.4.1",
+    "version": "0.4.3",
     "description": "A dynamic template CLI for Roblox projects.",
     "main": "dist/index.cjs",
     "type": "module",
     "scripts": {
         "build": "npx esbuild src/index.ts --bundle --outdir=dist --platform=node --minify --out-extension:.js=.cjs",
         "start": "npm run build && node dist/index.cjs",
-        "dev": "npx esbuild src/index.ts --bundle --outdir=dist --platform=node --watch",
+        "dev": "esbuild src/index.ts --bundle --outdir=dist --platform=node --out-extension:.js=.cjs && node dist/index.cjs",
         "npm:prepare": "npm run build",
         "ci:eslint": "eslint src/**/*.ts --config eslint.config.ts --flag unstable_ts_config",
         "ci:prettier": "prettier --check ./src",
@@ -29,16 +29,16 @@
     "dependencies": {
         "@inquirer/prompts": "^7.1.0",
         "@types/fs-extra": "11.0.4",
-        "@types/inquirer": "9.0.7",
         "chalk": "5.3.0",
-        "eslint-plugin-unused-imports": "^4.1.4",
         "fs-extra": "11.2.0",
-        "jiti": "^2.4.1",
-        "typescript-eslint": "^8.17.0",
         "winston": "3.11.0",
         "winston-error-format": "^3.0.1"
     },
     "devDependencies": {
+        "jiti": "^2.4.1",
+        "typescript-eslint": "^8.17.0",
+        "eslint-plugin-unused-imports": "^4.1.4",
+        "@eslint/js": "^9.16.0",
         "@typescript-eslint/eslint-plugin": "8.17.0",
         "eslint": "9.16.0",
         "prettier": "3.3.3"

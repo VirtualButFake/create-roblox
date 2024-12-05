@@ -2,7 +2,7 @@ import { ProjectSettings } from '../cli.js';
 import { writeTemplate } from '../utils.js';
 
 export default async function (settings: ProjectSettings) {
-    if (!settings.ui) return;
+    if (!settings.ui || settings.ui == 'none') return;
     if (!settings.storybookPlugin) return;
 
     await writeTemplate(

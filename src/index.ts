@@ -5,7 +5,6 @@ import scripts from './scripts/index.js';
 import fsExtra from 'fs-extra/esm';
 import path from 'path';
 import { executeCommand } from './utils.js';
-import { ExitPromptError } from '@inquirer/core';
 
 async function main() {
     const oldPath = process.cwd();
@@ -72,8 +71,8 @@ main()
     .then(() => {
         logger.info('Project setup complete!');
     })
-    .catch((err) => {
-        if (err instanceof ExitPromptError) {
+    .catch((err: Error) => {
+        if (err.name.includes('ExitPrompt')) {
             logger.debug('Project setup canceled.');
             process.exit(0);
         }

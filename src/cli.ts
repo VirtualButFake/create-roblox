@@ -1,5 +1,4 @@
 /* eslint no-var: 0, no-control-regex: 0 */
-import { Answers } from 'inquirer';
 import { input, select, checkbox, confirm, Separator } from '@inquirer/prompts';
 
 type Question = {
@@ -83,20 +82,26 @@ async function ask(question: Question): Promise<Answer> {
     }
 }
 
-async function queue(questions: Questions): Promise<Answers> {
+async function queue(questions: Questions): Promise<{
+    [key: string]: Answer;
+}> {
     for (let question of questions) {
         if ('question' in question) {
             question = question as ReactiveQuestion;
 
             const answer = await ask(question.question);
-            Object.assign(answers, answer);
+            Object.assign(answers, {
+                [question.question.name]: answer,
+            });
 
             if (question.completed) {
-                await question.completed(answer[Object.keys(answer)[0]]);
+                await question.completed(answer);
             }
         } else {
             const answer = await ask(question);
-            Object.assign(answers, answer);
+            Object.assign(answers, {
+                [question.name]: answer,
+            });
         }
     }
 

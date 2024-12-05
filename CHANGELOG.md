@@ -1,8 +1,27 @@
+# 0.4.3
+
+Fixes
+
+-   Remove unneeded dependencies
+-   Fix bug where error type was not properly detected when exiting the CLI via a `PromptExitError`
+
+# 0.4.2
+
+Updates
+
+-   Bump react-lua version to `17.2.1`
+
+Fixes
+
+-   Fix inquirer bug where answers were not recorded correctly
+-   Fix "none" option in UI framework selection causing an error
+-   Fixed bug where Storybook option would be asked if no UI framework is selected
+
 # 0.4.1
 
 Fixes
 
-- Make generated `README.md` for Fusion 0.3 games/packages use the correct version instead of 0.2
+-   Make generated `README.md` for Fusion 0.3 games/packages use the correct version instead of 0.2
 
 # 0.4.0
 
