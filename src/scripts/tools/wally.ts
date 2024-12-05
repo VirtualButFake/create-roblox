@@ -1,16 +1,23 @@
 import fs from 'fs';
 import os from 'os';
 import { ProjectSettings } from '../../cli.js';
-import {
-    executeCommand,
-    getTemplateData,
-    writeTemplate,
-    getPackagePath,
-} from '../../utils.js';
+import { getTemplateData, writeTemplate, getPackagePath } from '../../utils.js';
 
 const addSnippet = `
 
-    fs.move("./Packages", "./packages", true)`;
+    local success, result = pcall(function()
+        if fs.isDir("./Packages") then
+            fs.move("./Packages", "./packages", true)
+        end
+        
+        if fs.isDir("./ServerPackages") then
+            fs.move("./ServerPackages", "./ServerPackages", true)
+        end
+    end)
+
+    if not success then
+        warn("Failed to rename package folders (this is generally caused by wally/wally-package-types locking a file in the directory): " .. tostring(result))
+    end`;
 
 export default async function (settings: ProjectSettings) {
     if (!settings.tools.find((tool) => tool === 'wally')) return;
@@ -26,7 +33,14 @@ export default async function (settings: ProjectSettings) {
                 fs
                     .readFileSync(`./temp/${file}`, 'utf-8')
                     .replaceAll('{{ project_name }}', settings.projectName)
-                    .replaceAll('{{ package_path }}', getPackagePath(settings))
+                    .replaceAll(
+                        '{{ package_path }}',
+                        getPackagePath(settings, false)
+                    )
+                    .replaceAll(
+                        '{{ server_package_path }}',
+                        getPackagePath(settings, true)
+                    )
             );
         }
     }

@@ -1,6 +1,6 @@
 {
     "tools": {
-        "zap": "red-blox/zap@0.6.9"
+        "zap": "red-blox/zap@0.6.15"
     },
     "absolutePaths": {
         "@zap": ".zap"

@@ -291,12 +291,16 @@ export async function runBinary(
     return executeCommand(path.resolve(fullFilePath), args, options);
 }
 
-export function getPackagePath(settings: ProjectSettings) {
+export function getPackagePath(settings: ProjectSettings, isServer: boolean) {
     const packagePath = settings.wallyMods?.find(
         (mod: string) => mod === 'lowercaseNames'
     )
-        ? 'packages'
-        : 'Packages';
+        ? isServer
+            ? './serverPackages'
+            : './packages'
+        : isServer
+          ? './ServerPackages'
+          : './Packages';
 
     return packagePath;
 }

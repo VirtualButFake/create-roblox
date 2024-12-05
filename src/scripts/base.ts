@@ -13,7 +13,14 @@ export default async function (settings: ProjectSettings) {
                 fs
                     .readFileSync(`./temp/${file}`, 'utf-8')
                     .replaceAll('{{ project_name }}', settings.projectName)
-                    .replaceAll('{{ package_path }}', getPackagePath(settings))
+                    .replaceAll(
+                        '{{ package_path }}',
+                        getPackagePath(settings, false)
+                    )
+                    .replaceAll(
+                        '{{ server_package_path }}',
+                        getPackagePath(settings, true)
+                    )
             );
         }
     }

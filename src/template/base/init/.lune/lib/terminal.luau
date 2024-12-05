@@ -4,13 +4,13 @@ local terminal = {}
 local isVerbose = false
 
 local lineStateData = (_G._terminalLineStateData or {
-    currentLine = 0,
-    lineMax = 0,
-    lineLengthData = {},
+	currentLine = 0,
+	lineMax = 0,
+	lineLengthData = {},
 }) :: {
-    currentLine: number,
-    lineMax: number,
-    lineLengthData: { number },
+	currentLine: number,
+	lineMax: number,
+	lineLengthData: { number },
 }
 
 local stdio = require("@lune/stdio")
@@ -29,7 +29,7 @@ end
 
 local function moveCurrentLine(n)
 	lineStateData.currentLine += n
-	lineMax = math.max(lineStateData.lineMax, lineStateData.currentLine)
+	lineStateData.lineMax = math.max(lineStateData.lineMax, lineStateData.currentLine)
 end
 
 function terminal.moveLine(n: number)
@@ -90,7 +90,7 @@ function terminal.verbose(verbose: boolean)
 end
 
 function terminal.reset()
-	terminal.moveToLine(lineMax)
+	terminal.moveToLine(lineStateData.lineMax)
 end
 
 function terminal.pad(str, len)

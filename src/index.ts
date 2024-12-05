@@ -5,10 +5,20 @@ import scripts from './scripts/index.js';
 import fsExtra from 'fs-extra/esm';
 import path from 'path';
 import { executeCommand } from './utils.js';
+import { ExitPromptError } from '@inquirer/core';
 
 async function main() {
     const oldPath = process.cwd();
     process.chdir(path.join(__dirname, '..')); // i may or may not have been too lazy to convert all the paths to be relative to the project root etc etc
+
+    if (process.argv.includes('--version')) {
+        const packageJson = JSON.parse(
+            fs.readFileSync('./package.json', 'utf-8')
+        );
+        console.log(packageJson.version);
+        process.exit(0);
+    }
+
     const settings = await cli();
     logger.info('Initializing project setup..');
     logger.debug('Project Settings: ');
@@ -28,7 +38,34 @@ async function main() {
         cwd: './temp',
         stdio: 'inherit',
     });
-    fsExtra.moveSync('./temp', oldPath + '/' + settings.projectName);
+
+    return new Promise(() => {
+        fsExtra
+            .move('./temp', oldPath + '/' + settings.projectName)
+            .then(() => {
+                Promise.resolve();
+            })
+            .catch((err) => {
+                logger.error(
+                    'Failed to move project files. Retrying in 5 seconds.. View the error below:'
+                );
+                logger.error(err.stack);
+
+                setTimeout(() => {
+                    fsExtra
+                        .move('./temp', oldPath + '/' + settings.projectName)
+                        .catch((err) => {
+                            logger.error(
+                                'Failed to move project files on second attempt. View the error below:'
+                            );
+                            logger.error(err.stack);
+                            Promise.reject(err);
+                        });
+
+                    return Promise.resolve();
+                }, 5000);
+            });
+    });
 }
 
 main()
@@ -36,6 +73,11 @@ main()
         logger.info('Project setup complete!');
     })
     .catch((err) => {
-        console.log(err);
+        if (err instanceof ExitPromptError) {
+            logger.debug('Project setup canceled.');
+            process.exit(0);
+        }
+
+        logger.error(err.stack);
         process.exit(1);
     });

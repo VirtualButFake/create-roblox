@@ -38,11 +38,32 @@ export default async function (settings: ProjectSettings) {
             fs.readFileSync('./temp/.vscode/settings.json', 'utf-8')
         );
 
-        vscodeConfig['luau-lsp.require.directoryAliases'] = absolutePaths;
         fs.writeFileSync(
             './temp/.vscode/settings.json',
             JSON.stringify(vscodeConfig, null, 4)
         );
+
+        // write .luaurc
+        // remove leading @; luaurc does not need it
+        const luaurc = JSON.stringify(
+            {
+                aliases: Object.fromEntries(
+                    Object.entries(absolutePaths).map(([alias, path]) => [
+                        alias.slice(1),
+                        path,
+                    ])
+                ),
+                lintErrors: false,
+                typeErrors: true,
+                lint: {
+                    ['*']: true,
+                },
+            },
+            null,
+            4
+        );
+
+        fs.writeFileSync('./temp/.luaurc', luaurc);
 
         // set the {{ darklua_config_dev }} string in .lune/dev to ".darklua.json" if "injectDev" is not in the settings. otherwise, set it to ".darklua.dev.json"
         if (settings.darkluaMods.includes('injectDev')) {

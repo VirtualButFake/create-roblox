@@ -10,16 +10,16 @@ end
 local status = executeCommand("wally", {
 	"install",
 }, {
-    stdio = "inherit"   
+	stdio = "inherit",
 }, true)
 
-if not status.ok then 
-    logger:error("Failed to install packages!")
-    return
+if not status.ok then
+	logger:error("Failed to install packages!")
+	return
 end
 
-if not fs.isDir("packages") then 
-    fs.writeDir("packages")
+if not fs.isDir("packages") then
+	fs.writeDir("packages")
 end
 
 -- do this so the project file doesn't refer to files that don't exist and cause rojo to fail
@@ -45,7 +45,7 @@ if fs.isDir("Packages") then
 		logger:info("Successfully generated package types!")
 	else
 		logger:error("Failed to generate package types!")
-	end-- OPTIONAL_RENAME_STATEMENT
+	end -- OPTIONAL_RENAME_STATEMENT
 end
 
 logger:info("Installed packages!")

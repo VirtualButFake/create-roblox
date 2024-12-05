@@ -1,6 +1,6 @@
 {
     "name": "create-roblox",
-    "version": "0.3.25",
+    "version": "0.4.0",
     "description": "A dynamic template CLI for Roblox projects.",
     "main": "dist/index.cjs",
     "type": "module",
@@ -9,7 +9,7 @@
         "start": "npm run build && node dist/index.cjs",
         "dev": "npx esbuild src/index.ts --bundle --outdir=dist --platform=node --watch",
         "npm:prepare": "npm run build",
-        "ci:eslint": "eslint ./src --max-warnings=0 --ext .ts && tsc --noEmit",
+        "ci:eslint": "eslint src/**/*.ts --config eslint.config.ts --flag unstable_ts_config",
         "ci:prettier": "prettier --check ./src",
         "ci:tsc": "tsc --noEmit"
     },
@@ -27,17 +27,21 @@
     },
     "homepage": "https://github.com/VirtualButFake/create-roblox#readme",
     "dependencies": {
-        "@types/fs-extra": "^11.0.4",
-        "@types/inquirer": "^9.0.7",
-        "chalk": "^5.3.0",
-        "fs-extra": "^11.2.0",
-        "inquirer": "^9.2.14",
-        "winston": "^3.11.0"
+        "@inquirer/prompts": "^7.1.0",
+        "@types/fs-extra": "11.0.4",
+        "@types/inquirer": "9.0.7",
+        "chalk": "5.3.0",
+        "eslint-plugin-unused-imports": "^4.1.4",
+        "fs-extra": "11.2.0",
+        "jiti": "^2.4.1",
+        "typescript-eslint": "^8.17.0",
+        "winston": "3.11.0",
+        "winston-error-format": "^3.0.1"
     },
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^7.1.0",
-        "eslint": "^8.57.0",
-        "prettier": "^3.3.3"
+        "@typescript-eslint/eslint-plugin": "8.17.0",
+        "eslint": "9.16.0",
+        "prettier": "3.3.3"
     },
     "files": [
         "dist",

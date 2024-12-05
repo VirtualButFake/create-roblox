@@ -1,56 +1,51 @@
 name: CI
 on:
-  push:
-    branches:
-    - master
-    - main
-  pull_request:
-    branches:
-    - master
-    - main
+    push:
+        branches:
+            - master
+            - main
+    pull_request:
+        branches:
+            - master
+            - main
 
 env:
     CI: true
 
 jobs:
-  eslint:
-    name: ESLint
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '16'
-    - name: Install
-      run: npm install
-    - name: ESLint
-      run: npm run ci:eslint
-  prettier:
-    name: Prettier
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '16'
-    - name: Install
-      run: npm install
-    - name: Prettier
-      run: npm run ci:prettier
-  typescript:
-    name: TypeScript Compiler Check
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '16'
-    - name: Install
-      run: npm install
-    - name: TypeScript
-      run: npm run ci:tsc     
-    
-
-               
-   
-            
+    eslint:
+        name: ESLint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '18'
+            - name: Install
+              run: npm install
+            - name: ESLint
+              run: npm run ci:eslint
+    prettier:
+        name: Prettier
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '16'
+            - name: Install
+              run: npm install
+            - name: Prettier
+              run: npm run ci:prettier
+    typescript:
+        name: TypeScript Compiler Check
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '16'
+            - name: Install
+              run: npm install
+            - name: TypeScript
+              run: npm run ci:tsc

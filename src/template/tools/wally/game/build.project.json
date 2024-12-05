@@ -5,6 +5,12 @@
                 "$className": "Folder",
                 "$path": "{{ package_path }}"
             }
+        },
+        "ServerScriptService": {
+            "ServerPackages": {
+                "$className": "Folder",
+                "$path": "{{ server_package_path }}"
+            }
         }
     }
 }

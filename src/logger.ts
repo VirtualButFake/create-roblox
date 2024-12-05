@@ -1,11 +1,13 @@
 import winston from 'winston';
 import chalk from 'chalk';
+import { fullFormat } from 'winston-error-format';
 
 const logger = winston.createLogger({
     transports: [
         new winston.transports.Console({
             level: 'info',
             format: winston.format.combine(
+                fullFormat(),
                 winston.format((info) => {
                     const date = new Date();
                     info.level = info.level.toUpperCase();

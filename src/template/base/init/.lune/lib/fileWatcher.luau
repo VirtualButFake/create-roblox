@@ -54,8 +54,11 @@ return function(directory: string, callback: (files: { string }) -> any, onDelet
 		local modified = scanFiles(directory, currentMap)
 
 		if #modified > 0 then
-			lastModified = date.now().unixTimestamp -- placing this statement below could result in updates being skipped
-			callback(modified)
+			-- -0.5 to account for time that may have passed at some point
+			-- in my own testing, i experienced a lot of issues with the file watcher not detecting changes
+			-- so this is an attempt to fix that
+			lastModified = date.now().unixTimestamp - 0.5
+			task.spawn(callback, modified)
 		elseif lastModified == nil then
 			lastModified = date.now().unixTimestamp - 3
 		end

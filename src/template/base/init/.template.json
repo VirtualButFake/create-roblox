@@ -1,6 +1,6 @@
 {
     "tools": {
-        "rojo": "rojo-rbx/rojo@7.4.2",
-        "lune": "lune-org/lune@0.8.6"
+        "rojo": "rojo-rbx/rojo@7.4.4",
+        "lune": "lune-org/lune@0.8.9"
     }
 }

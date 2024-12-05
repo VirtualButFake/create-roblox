@@ -1,12 +1,29 @@
 /* eslint no-var: 0, no-control-regex: 0 */
-import inquirer, { Answers, QuestionCollection } from 'inquirer';
+import { Answers } from 'inquirer';
+import { input, select, checkbox, confirm, Separator } from '@inquirer/prompts';
+
+type Question = {
+    type: string;
+    name: string;
+    message: string;
+    validate?: (input: string) => boolean | string;
+    choices?: // typedef copied over from inquirer
+    | readonly (string | Separator)[]
+        | readonly (
+              | Separator
+              | { value: string; name?: string; short?: string; key?: string }
+          )[];
+    when?: () => boolean;
+};
+
+type Answer = any;
 
 type ReactiveQuestion = {
-    question: QuestionCollection;
+    question: Question;
     completed: (answer: string | any) => Promise<void>;
 };
 
-export type Questions = (QuestionCollection | ReactiveQuestion)[];
+export type Questions = (Question | ReactiveQuestion)[];
 
 const packages: { common: string[]; game: string[]; package: string[] } = {
     common: [],
@@ -28,10 +45,42 @@ export interface ProjectSettings {
     packages: string[];
 }
 
-const answers: Answers = {};
+const answers: {
+    [key: string]: Answer;
+} = {};
 
-async function ask(question: QuestionCollection): Promise<Answers> {
-    return inquirer.prompt([question]);
+async function ask(question: Question): Promise<Answer> {
+    switch (question.type) {
+        case 'input':
+            return await input({
+                message: question.message,
+                validate: question.validate,
+            });
+        case 'select':
+            if (!question.choices) {
+                throw new Error('No choices provided');
+            }
+
+            return await select({
+                message: question.message,
+                choices: question.choices,
+            });
+        case 'checkbox':
+            if (!question.choices) {
+                throw new Error('No choices provided');
+            }
+
+            return await checkbox({
+                message: question.message,
+                choices: question.choices,
+            });
+        case 'confirm':
+            return await confirm({
+                message: question.message,
+            });
+        default:
+            return {};
+    }
 }
 
 async function queue(questions: Questions): Promise<Answers> {
@@ -73,7 +122,7 @@ export default async function () {
             },
         },
         {
-            type: 'list',
+            type: 'select',
             name: 'projectType',
             message: 'What type of project would you like to create?',
             choices: [
@@ -180,7 +229,7 @@ export default async function () {
         },
         {
             question: {
-                type: 'list',
+                type: 'select',
                 name: 'ui',
                 message: 'What UI framework would you like to use?',
                 choices: [
@@ -189,8 +238,12 @@ export default async function () {
                         value: 'none',
                     },
                     {
-                        name: 'Fusion',
-                        value: 'fusion',
+                        name: 'Fusion 0.2',
+                        value: 'fusion0.2',
+                    },
+                    {
+                        name: 'Fusion 0.3',
+                        value: 'fusion0.3',
                     },
                     {
                         name: 'React Lua',
@@ -210,7 +263,7 @@ export default async function () {
 
                 await queue([
                     {
-                        type: 'list',
+                        type: 'select',
                         name: 'storybookPlugin',
                         message: 'What storybook plugin would you like to use?',
                         choices: [
