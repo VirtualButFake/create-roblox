@@ -6,6 +6,8 @@ A flexible and straightforward template CLI for Roblox projects, inspired by [ro
 
 [![License](https://img.shields.io/github/license/virtualbutfake/create-roblox)](https://github.com/VirtualButFake/create-roblox/blob/master/LICENSE.md)
 [![CI](https://github.com/virtualbutfake/create-roblox/actions/workflows/ci.yaml/badge.svg)](https://github.com/virtualbutfake/create-roblox/actions)
+[![NPM Version](https://img.shields.io/npm/v/create-roblox)](https://www.npmjs.com/package/create-roblox)
+[![NPM Downloads](https://img.shields.io/npm/dt/create-roblox)](https://www.npmjs.com/package/create-roblox)
 
 </div>
 
