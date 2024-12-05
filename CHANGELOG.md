@@ -1,3 +1,9 @@
+# 0.4.1
+
+Fixes
+
+- Make generated `README.md` for Fusion 0.3 games/packages use the correct version instead of 0.2
+
 # 0.4.0
 
 Updates
