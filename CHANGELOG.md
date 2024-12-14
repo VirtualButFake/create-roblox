@@ -1,3 +1,9 @@
+# 0.4.4
+
+Fixes
+
+- Fix bug that occured sometimes that didn't consider `when` condition of a question, resulting in the CLI breaking.
+
 # 0.4.3
 
 Fixes

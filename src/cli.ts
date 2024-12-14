@@ -87,6 +87,10 @@ async function queue(questions: Questions): Promise<{
 }> {
     for (let question of questions) {
         if ('question' in question) {
+            if (question.question.when && !question.question.when()) {
+                continue;
+            }
+
             question = question as ReactiveQuestion;
 
             const answer = await ask(question.question);
@@ -98,6 +102,10 @@ async function queue(questions: Questions): Promise<{
                 await question.completed(answer);
             }
         } else {
+            if (question.when && !question.when()) {
+                continue;
+            }
+
             const answer = await ask(question);
             Object.assign(answers, {
                 [question.name]: answer,
